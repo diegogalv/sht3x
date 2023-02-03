@@ -21,14 +21,7 @@ let SHT31_MEAS_HIGHREP = 0x2400
 
 //% color=#4c6ef5 weight=25 icon="\uf043" block="SHT3x Sensor"
 namespace CIPSHT3X {
-    Reset;
-    setReg(SHT31_MEAS_HIGHREP);
-    //let buf = pins.createBuffer(2);
-    //pins.i2cWriteNumber(SHT31_DEFAULT_ADDR, SHT31_MEAS_HIGHREP, NumberFormat.UInt8BE, false);
-
-    basic.pause(100);
-    let i2cBuffer = pins.i2cReadBuffer(SHT31_DEFAULT_ADDR, pins.sizeOf(NumberFormat.UInt16LE) * 7, false);
-
+    
     //pins.i2cWriteBuffer(SHT31_DEFAULT_ADDR, i2cBuffer, false);
 
     /**
@@ -38,6 +31,14 @@ namespace CIPSHT3X {
     //% blockId="SHT3xDriver_read_temperature"
     //% block="leer temperatura"
     export function leer_temperatura(): number {
+        Reset;
+        setReg(SHT31_MEAS_HIGHREP);
+        //let buf = pins.createBuffer(2);
+        //pins.i2cWriteNumber(SHT31_DEFAULT_ADDR, SHT31_MEAS_HIGHREP, NumberFormat.UInt8BE, false);
+
+        basic.pause(100);
+        let i2cBuffer = pins.i2cReadBuffer(SHT31_DEFAULT_ADDR, pins.sizeOf(NumberFormat.UInt16LE) * 7, false);
+
         let result = i2cBuffer[0] << 8;
         result |= i2cBuffer[1];
         result = ((4375 * result) >> 14) - 4500;
@@ -58,6 +59,14 @@ namespace CIPSHT3X {
     //% blockId="SHT3xDriver_read_humidity"
     //% block="leer leer humedad"
     export function leer_humedad(): number {
+        Reset;
+        setReg(SHT31_MEAS_HIGHREP);
+        //let buf = pins.createBuffer(2);
+        //pins.i2cWriteNumber(SHT31_DEFAULT_ADDR, SHT31_MEAS_HIGHREP, NumberFormat.UInt8BE, false);
+
+        basic.pause(100);
+        let i2cBuffer = pins.i2cReadBuffer(SHT31_DEFAULT_ADDR, pins.sizeOf(NumberFormat.UInt16LE) * 7, false);
+
         let result_2 = i2cBuffer[3] << 8;
         result_2 |= i2cBuffer[4];
         result_2 = (625 * result_2) >> 12;
