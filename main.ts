@@ -31,11 +31,6 @@ let SHT31_READSTATUS = 62253
 // < Soft Reset
 SHT31_SOFTRESET = 12450
 // < Heater Enable
-let SHT31_HEATEREN = 12397
-// < Heater Disable
-let SHT31_HEATERDIS = 12390
-// < Status Register Heater Bit
-let SHT31_REG_HEATER_BIT = 13
 namespace CIPSHT3X {
     Reset;
     setReg(SHT31_MEAS_HIGHREP);
