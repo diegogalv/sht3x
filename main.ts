@@ -35,8 +35,8 @@ namespace CIPSHT3X {
      * Read Temperature in degrees celcius from the SHT2x sensor.
      * Returns a number describing the ambient temperature in degrees celsius
     */
-    //% blockId="SHT2xDriver_read_temperature"
-    //% block="read temperature"
+    //% blockId="SHT3xDriver_read_temperature"
+    //% block="leer temperatura"
     export function leer_temperatura(): number {
         let result = i2cBuffer[0] << 8;
         result |= i2cBuffer[1];
@@ -55,8 +55,8 @@ namespace CIPSHT3X {
     * Returns a number describing the relative humidity in percentage % relative
     * humidity
    */
-    //% blockId="SHT2xDriver_read_humidity"
-    //% block="read humidity"
+    //% blockId="SHT3xDriver_read_humidity"
+    //% block="leer leer humedad"
     export function leer_humedad(): number {
         let result_2 = i2cBuffer[3] << 8;
         result_2 |= i2cBuffer[4];
