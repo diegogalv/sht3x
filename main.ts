@@ -29,7 +29,7 @@ namespace CIPSHT3X {
      * Returns a number describing the ambient temperature in degrees celsius
     */
     //% blockId="SHT3xDriver_read_temperature"
-    //% block="leer temperatura"
+    //% block="Leer Temperatura"
     export function leer_temperatura(): number {
         Reset;
         setReg(SHT31_MEAS_HIGHREP);
@@ -57,7 +57,7 @@ namespace CIPSHT3X {
     * humidity
    */
     //% blockId="SHT3xDriver_read_humidity"
-    //% block="leer leer humedad"
+    //% block="Leer Humedad"
     export function leer_humedad(): number {
         Reset;
         setReg(SHT31_MEAS_HIGHREP);
