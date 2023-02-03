@@ -1,29 +1,41 @@
-const SHT31_DEFAULT_ADDR = 0x44 /**< SHT31 Default Address */
-const SHT31_MEAS_HIGHREP_STRETCH = 0x2C06 /**< Measurement High Repeatability with Clock Stretch Enabled */
-const SHT31_MEAS_MEDREP_STRETCH = 0x2C0D /**< Measurement Medium Repeatability with Clock Stretch Enabled */
-const SHT31_MEAS_LOWREP_STRETCH = 0x2C10 /*< Measurement Low Repeatability with Clock Stretch Enabled*/
-const SHT31_MEAS_HIGHREP = 0x2400 /**< Measurement High Repeatability with Clock Stretch Disabled */
-const SHT31_MEAS_MEDREP = 0x240B /**< Measurement Medium Repeatability with Clock Stretch Disabled */
-const SHT31_MEAS_LOWREP = 0x2416 /**< Measurement Low Repeatability with Clock Stretch Disabled */
-const SHT31_READSTATUS = 0xF32D   /**< Read Out of Status Register */
-const SHT31_SOFTRESET = 0x30A2    /**< Soft Reset */
-const SHT31_HEATEREN = 0x306D     /**< Heater Enable */
-const SHT31_HEATERDIS = 0x3066    /**< Heater Disable */
-const SHT31_REG_HEATER_BIT = 0x0d /**< Status Register Heater Bit */
-function Reset() {
-    setReg(SHT31_SOFTRESET);
-    basic.pause(10);
-}
-
-function setReg(command: number) {
+function setReg (command: number) {
     let buf = pins.createBuffer(2);
-    //basic.pause(10)
+// basic.pause(10)
+    // basic.pause(10)
     buf[0] = command >> 8
     buf[1] = command & 0xFF
     return pins.i2cWriteBuffer(SHT31_DEFAULT_ADDR, buf)
 }
-
-
+// < Status Register Heater Bit
+function Reset () {
+    setReg(SHT31_SOFTRESET)
+    basic.pause(10)
+}
+let SHT31_SOFTRESET = 0
+// < SHT31 Default Address
+let SHT31_DEFAULT_ADDR = 68
+// < Measurement High Repeatability with Clock Stretch Enabled
+let SHT31_MEAS_HIGHREP_STRETCH = 11270
+// < Measurement Medium Repeatability with Clock Stretch Enabled
+let SHT31_MEAS_MEDREP_STRETCH = 11277
+// < Measurement Low Repeatability with Clock Stretch Enabled
+let SHT31_MEAS_LOWREP_STRETCH = 11280
+// < Measurement High Repeatability with Clock Stretch Disabled
+let SHT31_MEAS_HIGHREP = 9216
+// < Measurement Medium Repeatability with Clock Stretch Disabled
+let SHT31_MEAS_MEDREP = 9227
+// < Measurement Low Repeatability with Clock Stretch Disabled
+let SHT31_MEAS_LOWREP = 9238
+// < Read Out of Status Register
+let SHT31_READSTATUS = 62253
+// < Soft Reset
+SHT31_SOFTRESET = 12450
+// < Heater Enable
+let SHT31_HEATEREN = 12397
+// < Heater Disable
+let SHT31_HEATERDIS = 12390
+// < Status Register Heater Bit
+let SHT31_REG_HEATER_BIT = 13
 namespace CIPSHT3X {
     Reset;
     setReg(SHT31_MEAS_HIGHREP);
