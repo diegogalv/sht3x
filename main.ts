@@ -11,26 +11,15 @@ function Reset () {
     setReg(SHT31_SOFTRESET)
     basic.pause(10)
 }
-let SHT31_SOFTRESET = 0
+let SHT31_SOFTRESET = 0x30A2
 // < SHT31 Default Address
-let SHT31_DEFAULT_ADDR = 68
+let SHT31_DEFAULT_ADDR = 0x44
 // < Measurement High Repeatability with Clock Stretch Enabled
-let SHT31_MEAS_HIGHREP_STRETCH = 11270
-// < Measurement Medium Repeatability with Clock Stretch Enabled
-let SHT31_MEAS_MEDREP_STRETCH = 11277
-// < Measurement Low Repeatability with Clock Stretch Enabled
-let SHT31_MEAS_LOWREP_STRETCH = 11280
-// < Measurement High Repeatability with Clock Stretch Disabled
-let SHT31_MEAS_HIGHREP = 9216
-// < Measurement Medium Repeatability with Clock Stretch Disabled
-let SHT31_MEAS_MEDREP = 9227
-// < Measurement Low Repeatability with Clock Stretch Disabled
-let SHT31_MEAS_LOWREP = 9238
-// < Read Out of Status Register
-let SHT31_READSTATUS = 62253
-// < Soft Reset
-SHT31_SOFTRESET = 12450
-// < Heater Enable
+let SHT31_MEAS_HIGHREP = 0x2400
+
+
+
+//% color=#4c6ef5 weight=25 icon="\uf043" block="SHT3x Sensor"
 namespace CIPSHT3X {
     Reset;
     setReg(SHT31_MEAS_HIGHREP);
@@ -41,6 +30,13 @@ namespace CIPSHT3X {
     let i2cBuffer = pins.i2cReadBuffer(SHT31_DEFAULT_ADDR, pins.sizeOf(NumberFormat.UInt16LE) * 7, false);
 
     //pins.i2cWriteBuffer(SHT31_DEFAULT_ADDR, i2cBuffer, false);
+
+    /**
+     * Read Temperature in degrees celcius from the SHT2x sensor.
+     * Returns a number describing the ambient temperature in degrees celsius
+    */
+    //% blockId="SHT2xDriver_read_temperature"
+    //% block="read temperature"
     export function leer_temperatura(): number {
         let result = i2cBuffer[0] << 8;
         result |= i2cBuffer[1];
@@ -54,6 +50,13 @@ namespace CIPSHT3X {
     //basic.pause(1000)
     //CRC8(i2cBuffer[0], i2cBuffer[1], i2cBuffer[2]);
     //basic.showNumber(i2cBuffer[0]);
+    /**
+    * Read Relative Humidity from the SHT2x Sensor.
+    * Returns a number describing the relative humidity in percentage % relative
+    * humidity
+   */
+    //% blockId="SHT2xDriver_read_humidity"
+    //% block="read humidity"
     export function leer_humedad(): number {
         let result_2 = i2cBuffer[3] << 8;
         result_2 |= i2cBuffer[4];
